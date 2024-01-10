@@ -32,7 +32,7 @@ class WikiRepository extends Repository
 
     public function getAuthor($wikiId)
     {
-        $this->db->query('SELECT * FROM authors WHERE id = (SELECT author_id FROM wikis WHERE id = :wikiId)');
+        $this->db->query('SELECT * FROM users WHERE id = (SELECT author_id FROM wikis WHERE id = :wikiId)');
         $this->db->bind(':wikiId', $wikiId);
         $result = $this->db->fetchSingleRecord();
 

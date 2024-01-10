@@ -11,4 +11,14 @@ class WikiController extends Controller
     {
         parent::__construct(WikiRepository::class);
     }
+
+    public function show()
+    {
+        $wikis = $this->repository->all();
+        $config = [
+            'cols' => ['image', 'title', 'description', 'created_at', 'category', 'tags', 'update', 'delete'],
+            'route' => 'wikis'
+        ];
+        $this->render('backOffice/wikis/show', compact('wikis', 'config'));
+    }
 }
