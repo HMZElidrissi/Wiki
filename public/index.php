@@ -10,13 +10,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $router = require_once 'routes.php';
 
+function abort($code = 404)
+{
+    http_response_code($code);
+    (new \App\Controllers\HomeController())->error($code);
+}
+
 try {
     $route = $router->route($uri, $method);
 } catch (Exception $e) {
-    http_response_code(404);
-    echo "404 Page Not Found";
-    exit;
+    abort();
 }
+
 $controller = new $route['controller']();
 $action = $route['action'];
 $controller->$action();

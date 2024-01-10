@@ -2,14 +2,21 @@
 
 namespace Core;
 
+use Core\Middleware\Middleware;
+
 class Router
 {
     public $routes = [];
 
     public function add($method, $uri, $controller, $action)
     {
-        $middleware = null;
-        $this->routes[] = compact('method', 'uri', 'controller', 'action', 'middleware');
+        $this->routes[] = [
+            'uri' => $uri,
+            'controller' => $controller,
+            'action' => $action,
+            'method' => $method,
+            'middleware' => null
+        ];
     }
 
     public function get($uri, $controller, $action)
@@ -22,7 +29,7 @@ class Router
         $this->add('POST', $uri, $controller, $action);
     }
 
-    public function only($key)
+    public function middleware($key)
     {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
     }
@@ -31,9 +38,12 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                if ($route['middleware']) {
+                    Middleware::getMiddlewareByKey($route['middleware']);
+                }
                 return $route;
             }
         }
-        throw new \Exception('No route defined for this URI.');
+        throw new \Exception("No route found for {$uri}.");
     }
 }

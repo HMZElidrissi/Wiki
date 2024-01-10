@@ -35,4 +35,9 @@ class HomeController extends Controller
         }
         $this->render('auth/register');
     }
+
+    public function error($code)
+    {
+        $this->render('errors/'.$code);
+    }
 }

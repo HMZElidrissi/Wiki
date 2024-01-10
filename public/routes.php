@@ -15,7 +15,7 @@ $router->get('/login', HomeController::class, 'login');
 $router->get('/register', HomeController::class, 'register');
 $router->get('/wikis/show', WikiController::class, 'show');
 $router->get('/wikis/show', AuthorWikiController::class, 'show');
-
+$router->get('/{code}', HomeController::class, 'error');
 
 
 return $router;

@@ -17,7 +17,7 @@ class WikiController extends Controller
     {
         $wikis = $this->repository->all();
         $config = [
-            'cols' => ['image', 'title', 'description', 'created_at', 'category', 'author', 'tags', 'archive'],
+            'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'archive'],
             'route' => 'wikis'
         ];
         $this->render('backOffice/wikis/show', compact('wikis', 'config'));
