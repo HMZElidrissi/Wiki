@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Controllers;
+use App\Repository\WikiRepository;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct(WikiRepository::class);
+    }
     public function home()
     {
-        $this->render('frontOffice/home');
+        $wikis = $this->repository->all();
+        $this->render('frontOffice/home', compact('wikis'));
     }
 
     public function dashboard()
