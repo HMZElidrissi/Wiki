@@ -9,7 +9,7 @@ class HomeController extends Controller
     {
         parent::__construct(WikiRepository::class);
     }
-    public function home()
+    public function index()
     {
         $wikis = $this->repository->all();
         $this->render('frontOffice/home', compact('wikis'));
@@ -30,6 +30,9 @@ class HomeController extends Controller
 
     public function register()
     {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
         $this->render('auth/register');
     }
 }
