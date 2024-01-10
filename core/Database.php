@@ -150,16 +150,16 @@ class Database
     /**
      * Prevent instance from being serialized.
      */
-    protected function __sleep() { }
+    public function __sleep() { }
 
     /**
      * Prevent instance from being cloned.
      */
-    private function __clone() { }
+    public function __clone() { }
 
     /**
      * Prevent instance from being unserialized.
      */
-    private function __wakeup() { }
+    public function __wakeup() { }
 
 }
