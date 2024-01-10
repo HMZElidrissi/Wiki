@@ -32,11 +32,11 @@ class RenderTable
                     $imageUrl = $wiki->image ?? '/assets/img/products/2.jpg';
                     $table .= '<td><img src="' . $imageUrl . '" alt="" style="width: 40px;"></td>';
                 } else if($col == 'update'){
-                    $table .= '<td><a href="/' . $config['route'] . '/update/' . $item->id . '" class="btn btn-primary">Update</a></td>';
+                    $table .= '<td><a href="/' . $config['route'] . '/update/' . $item->id . '"><i class="h5 text-info fas fa-pen"></i></a></td>';
                 } else if($col == 'delete'){
-                    $table .= '<td><a href="/' . $config['route'] . '/delete/' . $item->id . '" class="btn btn-danger">Delete</a></td>';
+                    $table .= '<td><a href="/' . $config['route'] . '/delete/' . $item->id . '"><i class="h5 text-danger fas fa-trash-alt"></i></a></td>';
                 } else if ($col == 'archive'){
-                    $table .= '<td><a href="/' . $config['route'] . '/archive/' . $item->id . '" class="btn btn-warning">Archive</a></td>';
+                    $table .= '<td><a href="/' . $config['route'] . '/archive/' . $item->id . '"><i class=" h5 text-warning fas fa-inbox"></i></a></td>';
                 } else if ($col == 'category'){
                     $wikiRepo = new WikiRepository();
                     $table .= '<td><span class="text-white badge bg-primary">' . $wikiRepo->getCategory($item->id) . '</span></td>';
