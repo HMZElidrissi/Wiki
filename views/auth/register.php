@@ -23,19 +23,21 @@
                         <div class="text-center">
                             <h4 class="text-dark mb-4">Créez un compte !</h4>
                         </div>
-                        <form class="user">
-                            <div class="row mb-3">
-                                <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Nom complet" name="first_name">
+                        <div id="error" class="mb-3 text-danger small"></div>
+                        <form class="user" method="POST" onsubmit="return validateForm()">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <div class="mb-3">
+                                <input class="form-control form-control-user" type="text" id="name" placeholder="Nom complet" name="name">
                             </div>
                             <div class="mb-3">
-                                <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Adresse e-mail" name="email">
+                                <input class="form-control form-control-user" type="email" id="email" placeholder="Adresse e-mail" name="email">
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input class="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Mot de passe" name="password">
+                                    <input class="form-control form-control-user" type="password" id="password" placeholder="Mot de passe" name="password">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input class="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Répéter le mot de passe" name="password_repeat">
+                                    <input class="form-control form-control-user" type="password" id="passwordRepeat" placeholder="Répéter le mot de passe" name="password_repeat">
                                 </div>
                             </div>
                             <button class="btn btn-primary d-block btn-user w-100" type="submit">S'inscrire</button>
@@ -48,13 +50,45 @@
                             </a>
                             <hr>
                         </form>
-                        <div class="text-center"><a class="small" href="login.php">Vous avez déjà un compte ? Connectez-vous !</a></div>
+                        <div class="text-center">
+                            <a class="small" href="/login">Vous avez déjà un compte ? Connectez-vous !</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function validateForm() {
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let passwordRepeat = document.getElementById('passwordRepeat').value;
+
+        if (name === '' || email === '' || password === '' || passwordRepeat === '') {
+            message('Veuillez remplir tous les champs !');
+            return false;
+        }
+
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            message("L'adresse e-mail n'est pas valide !");
+            return false;
+        }
+
+        if (password !== passwordRepeat) {
+            message('Les mots de passe ne correspondent pas !');
+            return false;
+        }
+
+        return true;
+    }
+
+    function message(m) {
+        document.getElementById("error").innerHTML = m;
+    }
+</script>
 <script src="assets/dashboard/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/dashboard/js/bs-init.js"></script>
 <script src="assets/dashboard/js/theme.js"></script>

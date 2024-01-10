@@ -1,0 +1,20 @@
+{
+    "name": "hmzelidrissi/wiki",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "HMZElidrissi",
+            "email": "hamza.ezzharelidrissi1@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+      "ext-pdo": "*"
+    }
+}

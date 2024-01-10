@@ -8,7 +8,8 @@ class Router
 
     public function add($method, $uri, $controller, $action)
     {
-        $this->routes[] = compact('method', 'uri', 'controller', 'action');
+        $middleware = null;
+        $this->routes[] = compact('method', 'uri', 'controller', 'action', 'middleware');
     }
 
     public function get($uri, $controller, $action)
@@ -21,9 +22,11 @@ class Router
         $this->add('POST', $uri, $controller, $action);
     }
 
-    /**
-     * @throws \Exception
-     */
+    public function only($key)
+    {
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+    }
+
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {

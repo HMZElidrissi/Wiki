@@ -50,7 +50,7 @@
                                     <hr>
                                 </form>
                                 <div class="text-center"><a class="small" href="#">Mot de passe oublié ?</a></div>
-                                <div class="text-center"><a class="small" href="register.php">Créer un compte !</a></div>
+                                <div class="text-center"><a class="small" href="/register">Créer un compte !</a></div>
                             </div>
                         </div>
                     </div>
