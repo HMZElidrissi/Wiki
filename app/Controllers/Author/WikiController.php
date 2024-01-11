@@ -14,7 +14,7 @@ class WikiController extends Controller
 
     public function show(): void
     {
-        $wikis = $this->repository->all(['author_id' => $_SESSION['user_id']]);
+        $wikis = $this->repository->all(['is_archived' => 0, 'author_id' => $_SESSION['user_id']]);
         $config = [
             'add' => [
                 'route' => '/wikis/create',

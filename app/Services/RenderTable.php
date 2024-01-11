@@ -51,8 +51,10 @@ class RenderTable
                     $table .= '<td><form action="/' . $config['route'] . '/update" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-info"><i class="h5 fas fa-edit"></i></button></form></td>';
                 } else if($col == 'delete'){
                     $table .= '<td><form action="/' . $config['route'] . '/delete" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-danger"><i class="h5 fas fa-trash-alt"></i></button></form></td>';
-                } else if ($col == 'archive'){
-                    $table .= '<td><a href="/' . $config['route'] . '/archive/' . $item->id . '"><i class=" h5 text-warning fas fa-inbox"></i></a></td>';
+                } else if ($col == 'archive') {
+                    $table .= '<td><form action="/' . $config['route'] . '/archive" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-warning"><i class="h5 fas fa-inbox"></i></button></form></td>';
+                } else if ($col == 'restore'){
+                    $table .= '<td><form action="/' . $config['route'] . '/restore" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-success"><i class="h5 fas fa-trash-restore-alt"></i></button></form></td>';
                 } else if ($col == 'category'){
                     $wikiRepo = new WikiRepository();
                     $table .= '<td><span class="text-white badge bg-primary">' . $wikiRepo->getCategory($item->id) . '</span></td>';

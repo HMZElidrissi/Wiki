@@ -25,10 +25,23 @@ class Repository
 
     public function all($conditions = [])
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $query = 'SELECT * FROM ' . $this->table;
         if (!empty($conditions)) {
-            $this->db->query('SELECT * FROM ' . $this->table . ' WHERE ' . implode(' AND ', $conditions));
+            $columns = array_keys($conditions);
+            $placeholders = array_map(function ($column) {
+                return "$column = :$column";
+            }, $columns);
+            $placeholdersString = implode(' AND ', $placeholders);
+            $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $placeholdersString;
         }
+        $this->db->query($query);
+
+        if (!empty($conditions)) {
+            foreach ($conditions as $column => $value) {
+                $this->db->bind(":$column", $value);
+            }
+        }
+
         $results = $this->db->fetchAllRecords();
 
         $objects = [];

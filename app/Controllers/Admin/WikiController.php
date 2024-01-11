@@ -13,11 +13,33 @@ class WikiController extends Controller
         parent::__construct(WikiRepository::class);
     }
 
-    public function show()
+    public function display()
     {
-        $wikis = $this->repository->all();
+        $wikis = $this->repository->all(['is_archived' => 0]);
         $config = [
             'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'archive'],
+            'route' => 'wikis'
+        ];
+        $this->render('backOffice/wikis/show', compact('wikis', 'config'));
+    }
+
+    public function archive()
+    {
+        $this->repository->archive($_POST['id']);
+        header('Location: /wikis/archived');
+    }
+
+    public function restore()
+    {
+        $this->repository->restore($_POST['id']);
+        header('Location: /wikis/display');
+    }
+
+    public function archived()
+    {
+        $wikis = $this->repository->all(['is_archived' => 1]);
+        $config = [
+            'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'restore'],
             'route' => 'wikis'
         ];
         $this->render('backOffice/wikis/show', compact('wikis', 'config'));

@@ -17,6 +17,14 @@ function abort($code = 404)
     (new \App\Controllers\HomeController())->error($code);
 }
 
+function dd($data)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    die();
+}
+
 try {
     $route = $router->route($uri, $method);
 } catch (Exception $e) {

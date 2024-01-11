@@ -39,6 +39,20 @@ class WikiRepository extends Repository
         }
     }
 
+    public function archive($id)
+    {
+        $this->db->query('UPDATE wikis SET is_archived = 1 WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $this->db->execute();
+    }
+
+    public function restore($id)
+    {
+        $this->db->query('UPDATE wikis SET is_archived = 0 WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $this->db->execute();
+    }
+
     public function getAllCategories()
     {
         $this->db->query('SELECT * FROM categories');
