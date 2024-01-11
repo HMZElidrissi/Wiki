@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-
 use App\Repository\WikiRepository;
 
 class RenderTable
@@ -10,6 +9,11 @@ class RenderTable
     public static function render($data, $config): string
     {
         $table = '<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">';
+        if (isset($config['add'])) {
+            $table .= '<div class="d-flex justify-content-start mb-2">';
+            $table .= '<a href="' . $config['add']['route'] . '" class="btn btn-primary">' . $config['add']['title'] . '</a>';
+            $table .= '</div>';
+        }
         $table .= '<table class="table my-0" id="dataTable">';
         $table .= '<thead>';
         $table .= '<tr>';
@@ -17,7 +21,15 @@ class RenderTable
             if ($col == 'image' || $col == 'update' || $col == 'delete' || $col == 'archive') {
                 $table .= '<th></th>';
             } else if ($col == 'created_at') {
-                $table .= '<th>Created at</th>';
+                $table .= '<th>Date de création</th>';
+            } else if ($col == 'updated_at') {
+                $table .= '<th>Date de modification</th>';
+            } else if ($col == 'category') {
+                $table .= '<th>Catégorie</th>';
+            } else if ($col == 'title') {
+                $table .= '<th>Titre</th>';
+            } else if ($col == 'author') {
+                $table .= '<th>Auteur</th>';
             } else {
                 $table .= '<th>' . ucfirst($col) . '</th>';
             }
@@ -29,12 +41,16 @@ class RenderTable
             $table .= '<tr>';
             foreach ($config['cols'] as $col) {
                 if($col == 'image'){
-                    $imageUrl = $wiki->image ?? '/assets/img/products/2.jpg';
+                    if ($item->image) {
+                        $imageUrl = 'data:image/jpeg;base64,' . base64_encode($item->image);
+                    } else {
+                        $imageUrl = '/assets/img/products/2.jpg';
+                    }
                     $table .= '<td><img src="' . $imageUrl . '" alt="" style="width: 40px;"></td>';
                 } else if($col == 'update'){
-                    $table .= '<td><a href="/' . $config['route'] . '/update/' . $item->id . '"><i class="h5 text-info fas fa-pen"></i></a></td>';
+                    $table .= '<td><form action="/' . $config['route'] . '/update" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-info"><i class="h5 fas fa-edit"></i></button></form></td>';
                 } else if($col == 'delete'){
-                    $table .= '<td><a href="/' . $config['route'] . '/delete/' . $item->id . '"><i class="h5 text-danger fas fa-trash-alt"></i></a></td>';
+                    $table .= '<td><form action="/' . $config['route'] . '/delete" method="post"><input type="hidden" name="id" value="' . $item->id . '"><button type="submit" class="btn btn-link text-danger"><i class="h5 fas fa-trash-alt"></i></button></form></td>';
                 } else if ($col == 'archive'){
                     $table .= '<td><a href="/' . $config['route'] . '/archive/' . $item->id . '"><i class=" h5 text-warning fas fa-inbox"></i></a></td>';
                 } else if ($col == 'category'){

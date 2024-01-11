@@ -10,10 +10,10 @@ class Wiki
     public string $description;
     public string $content;
     public string $created_at;
-    public bool $is_archived;
+    public int $is_archived;
 
 
-    public function new(int $id, string $title, string $image, string $description, string $content, string $created_at, bool $is_archived)
+    public function new(int $id, string $title, string $image, string $description, string $content, string $created_at, int $is_archived)
     {
         $this->id = $id;
         $this->title = $title;

@@ -87,6 +87,9 @@ class Database
                 case is_null($value):
                     $type = PDO::PARAM_NULL;
                     break;
+                case is_resource($value):
+                    $type = PDO::PARAM_LOB;
+                    break;
                 default:
                     $type = PDO::PARAM_STR;
             }
@@ -142,7 +145,7 @@ class Database
         return $this->statement->rowCount();
     }
 
-    public function lastInsertId()
+    public function getLastInsertedId()
     {
         return $this->pdo->lastInsertId();
     }

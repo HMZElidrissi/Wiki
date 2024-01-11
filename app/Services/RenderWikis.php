@@ -15,7 +15,11 @@ class RenderWikis
 
         foreach ($wikis as $wiki) {
             $html .= '<div class="col mb-4">';
-            $imageUrl = $wiki->image ?? 'assets/img/products/2.jpg';
+            if ($wiki->image ) {
+                $imageUrl = 'data:image/jpeg;base64,' . base64_encode($wiki->image);
+            } else {
+                $imageUrl = '/assets/img/products/2.jpg';
+            }
             $html .= '<div><a href="/wiki/"'. $wiki->id . '"><img class="rounded img-fluid shadow w-100 fit-cover" src="' . $imageUrl . '" style="height: 250px;"></a>';
             $html .= '<div class="py-4">';
             $html .= '<span class="badge bg-primary mb-2">' . $wikiRepo->getCategory($wiki->id) . '</span><br>';

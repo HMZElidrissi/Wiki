@@ -6,12 +6,49 @@ use App\Models\Wiki;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Tag;
+use PDO;
 
 class WikiRepository extends Repository
 {
     public function __construct()
     {
         parent::__construct(Wiki::class, 'wikis');
+    }
+
+    public function addWikiTags($wikiId, $tags)
+    {
+        foreach ($tags as $tagId) {
+            $this->db->query('INSERT INTO wiki_tags (wiki_id, tag_id) VALUES (:wikiId, :tagId)');
+            $this->db->bind(':wikiId', $wikiId);
+            $this->db->bind(':tagId', $tagId);
+            $this->db->execute();
+        }
+    }
+
+    public function updateWikiTags($wikiId, $tags): void
+    {
+        $this->db->query('DELETE FROM wiki_tags WHERE wiki_id = :wikiId');
+        $this->db->bind(':wikiId', $wikiId);
+        $this->db->execute();
+
+        foreach ($tags as $tagId) {
+            $this->db->query('INSERT INTO wiki_tags (wiki_id, tag_id) VALUES (:wikiId, :tagId)');
+            $this->db->bind(':wikiId', $wikiId);
+            $this->db->bind(':tagId', $tagId);
+            $this->db->execute();
+        }
+    }
+
+    public function getAllCategories()
+    {
+        $this->db->query('SELECT * FROM categories');
+        return $this->db->fetchAllRecords();
+    }
+
+    public function getAllTags()
+    {
+        $this->db->query('SELECT * FROM tags');
+        return $this->db->fetchAllRecords();
     }
 
     public function getCategory($wikiId)

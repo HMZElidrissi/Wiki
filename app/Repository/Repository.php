@@ -18,9 +18,17 @@ class Repository
         $this->conditions = $conditions;
     }
 
-    public function all()
+    public function getLastInsertedId()
+    {
+        return $this->db->getLastInsertedId();
+    }
+
+    public function all($conditions = [])
     {
         $this->db->query('SELECT * FROM ' . $this->table);
+        if (!empty($conditions)) {
+            $this->db->query('SELECT * FROM ' . $this->table . ' WHERE ' . implode(' AND ', $conditions));
+        }
         $results = $this->db->fetchAllRecords();
 
         $objects = [];
@@ -52,22 +60,44 @@ class Repository
     public function create($data)
     {
         $columns = array_keys($data);
-        $values = array_values($data);
-        $columns = implode(',', $columns);
-        $values = implode(',', array_map(function ($value) {
-            return "'$value'";
-        }, $values));
-        $this->db->query("INSERT INTO $this->table ($columns) VALUES ($values)");
+        $placeholders = array_map(function ($column) {
+            return ":$column";
+        }, $columns);
+
+        $columnsString = implode(',', $columns);
+        $placeholdersString = implode(',', $placeholders);
+
+        $this->db->query("INSERT INTO $this->table ($columnsString) VALUES ($placeholdersString)");
+
+        foreach ($data as $column => $value) {
+            $this->db->bind(":$column", $value);
+        }
+
         return $this->db->execute();
     }
 
     public function update($id, $data)
     {
+        $columns = array_keys($data);
+        $placeholders = array_map(function ($column) {
+            return "$column = :$column";
+        }, $columns);
 
+        $placeholdersString = implode(',', $placeholders);
+
+        $this->db->query("UPDATE $this->table SET $placeholdersString WHERE id = :id");
+        $this->db->bind(':id', $id);
+        foreach ($data as $column => $value) {
+            $this->db->bind(":$column", $value);
+        }
+
+        return $this->db->execute();
     }
 
     public function delete($id)
     {
-
+        $this->db->query("DELETE FROM $this->table WHERE id = :id");
+        $this->db->bind(':id', $id);
+        return $this->db->execute();
     }
 }
