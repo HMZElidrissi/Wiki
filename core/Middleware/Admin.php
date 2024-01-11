@@ -7,7 +7,7 @@ class Admin
     public function handle()
     {
         if ($_SESSION['role'] != 'admin') {
-            header('location: /');
+            abort(403);
             exit();
         }
     }

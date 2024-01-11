@@ -7,7 +7,7 @@ class Author
     public function handle()
     {
         if ($_SESSION['role'] != 'author') {
-            header('location: /');
+            abort(403);
             exit();
         }
     }
