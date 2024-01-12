@@ -23,18 +23,6 @@ class HomeController extends Controller
         $this->render('frontOffice/wiki', compact('wiki'));
     }
 
-    public function showCategories(): void
-    {
-        $categories = $this->repository->getAllCategories();
-        $this->render('frontOffice/categories', compact('categories'));
-    }
-
-    public function showTags(): void
-    {
-        $tags = $this->repository->getAllTags();
-        $this->render('frontOffice/tags', compact('tags'));
-    }
-
     public function dashboard(): void
     {
         $this->render('backOffice/dashboard');

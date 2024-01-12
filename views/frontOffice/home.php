@@ -19,11 +19,17 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/categories/show">Catégories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tags/show">Tags</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/wikis/latest">Les derniers wikis</a></li>
                 </ul>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <form action="/logout" method="post">
+                        <input type="hidden" name="logout">
+                        <a name="logout" type="submit" class="btn btn-primary shadow">Se déconnecter</a>
+                    </form>
+                <?php else : ?>
                 <a class="btn btn-outline-light shadow me-2" role="button" href="/register">S'inscrire</a>
                 <a class="btn btn-primary shadow" role="button" href="/login">Se connecter</a>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

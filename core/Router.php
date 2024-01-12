@@ -8,30 +8,25 @@ class Router
 {
     public $routes = [];
 
-    public function add($method, $uri, $controller, $action)
+    public function add($method, $uri, $controller, $action, $middleware = null)
     {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
             'action' => $action,
             'method' => $method,
-            'middleware' => null
+            'middleware' => $middleware
         ];
     }
 
-    public function get($uri, $controller, $action)
+    public function get($uri, $controller, $action, $middleware = null)
     {
-        $this->add('GET', $uri, $controller, $action);
+        $this->add('GET', $uri, $controller, $action, $middleware);
     }
 
-    public function post($uri, $controller, $action)
+    public function post($uri, $controller, $action, $middleware = null)
     {
-        $this->add('POST', $uri, $controller, $action);
-    }
-
-    public function middleware($key)
-    {
-        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+        $this->add('POST', $uri, $controller, $action, $middleware);
     }
 
     public function route($uri, $method)
