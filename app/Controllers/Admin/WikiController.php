@@ -36,11 +36,11 @@ class WikiController extends Controller
 
     public function archived()
     {
-        $wikis = $this->repository->all(['is_archived' => 1]);
+        $data = $this->repository->all(['is_archived' => 1]);
         $config = [
             'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'restore'],
             'route' => 'wikis'
         ];
-        $this->render('backOffice/crudViews/show', compact('wikis', 'config'));
+        $this->render('backOffice/crudViews/show', compact('data', 'config'));
     }
 }
