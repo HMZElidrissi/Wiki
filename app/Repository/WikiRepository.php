@@ -38,6 +38,31 @@ class WikiRepository extends Repository
         }
     }
 
+    public function search($search)
+    {
+        $query = "SELECT w.*, c.title AS category_title, GROUP_CONCAT(t.title) AS tag_titles
+                  FROM wikis w
+                  LEFT JOIN categories c ON w.category_id = c.id
+                  LEFT JOIN wiki_tags wt ON w.id = wt.wiki_id
+                  LEFT JOIN tags t ON wt.tag_id = t.id
+                  WHERE w.title LIKE :search OR c.title LIKE :search OR t.title LIKE :search
+                  GROUP BY w.id";
+        $this->db->query($query);
+        $this->db->bind(':search', '%' . $search . '%');
+        $results = $this->db->fetchAllRecords();
+
+        $objects = [];
+        foreach ($results as $result) {
+            $object = new $this->class();
+            $properties = get_class_vars($this->class);
+            foreach ($properties as $property => $value) {
+                $object->$property = $result->$property;
+            }
+            $objects[] = $object;
+        }
+        return $objects;
+    }
+
     public function latest()
     {
         $this->db->query('SELECT * FROM wikis WHERE is_archived = 0 ORDER BY created_at DESC LIMIT 3');

@@ -49,7 +49,7 @@
                         <div class="input-group my-4">
                             <input type="text"
                                    class="form-control"
-                                   placeholder="Rechercher des wikis ..."
+                                   placeholder="Rechercher des wikis, des catégories, des tags ..."
                                    name="searchInput"
                                    id="searchInput">
                             <button class="btn btn-success" id="searchBtn" type="button">Recherche</button>

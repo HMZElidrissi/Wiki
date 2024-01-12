@@ -71,7 +71,7 @@ class RenderWikis
             $imageUrl = '/assets/img/products/1.jpg';
         }
         $html .= '<img class="rounded img-fluid shadow w-100 fit-cover" src="' . $imageUrl . '" style="height: 350px; object-fit: cover;">';
-        $html .= '<p class="text-center">' . $wiki->content . '</p>';
+        $html .= '<p class="text-center">' . nl2br($wiki->content) . '</p>';
         $html .= '</div>';
         $html .= '<div class="py-3">';
         $html .= '<div class="tags">';

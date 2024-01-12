@@ -55,7 +55,7 @@ class Repository
         return $objects;
     }
 
-    public function search($search, $searchColumns = [], $conditions = [])
+/*    public function search($search, $searchColumns = [], $conditions = [])
     {
         $searchConditions = array_map(function($column) {
             return "$column LIKE :search";
@@ -96,7 +96,7 @@ class Repository
             $objects[] = $object;
         }
         return $objects;
-    }
+    }*/
 
 
     public function find($id)
