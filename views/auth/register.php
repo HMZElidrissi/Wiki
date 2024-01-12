@@ -30,6 +30,9 @@
                                 <input class="form-control form-control-user" type="text" id="name" placeholder="Nom complet" name="name">
                             </div>
                             <div class="mb-3">
+                                <?php if (isset($_SESSION['errors']['email'])): ?>
+                                    <p class="mb-3 text-danger small"><?= $_SESSION['errors']['email'] ?></p>
+                                <?php endif; ?>
                                 <input class="form-control form-control-user" type="email" id="email" placeholder="Adresse e-mail" name="email">
                             </div>
                             <div class="row mb-3">

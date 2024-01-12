@@ -25,12 +25,19 @@
                                 <div class="text-center">
                                     <h4 class="text-dark mb-4">Bienvenue à nouveau !</h4>
                                 </div>
+                                <div id="error" class="mb-3 text-danger small"></div>
                                 <form class="user" method="POST" action="/login">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <div class="mb-3">
+                                        <?php if (isset($_SESSION['errors']['user'])): ?>
+                                            <p class="mb-3 text-danger small"><?= $_SESSION['errors']['user'] ?></p>
+                                        <?php endif; ?>
                                         <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrez l'adresse e-mail..." name="email">
                                     </div>
                                     <div class="mb-3">
+                                        <?php if (isset($_SESSION['errors']['password'])): ?>
+                                            <p class="text-danger"><?= $_SESSION['errors']['password'] ?></p>
+                                        <?php endif; ?>
                                         <input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Mot de passe" name="password">
                                     </div>
                                     <div class="mb-3">

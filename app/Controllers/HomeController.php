@@ -37,6 +37,7 @@ class HomeController extends Controller
 
     public function login(): void
     {
+        $_SESSION['errors'] = [];
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
@@ -45,6 +46,7 @@ class HomeController extends Controller
 
     public function register(): void
     {
+        $_SESSION['errors'] = [];
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }

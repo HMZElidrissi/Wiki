@@ -23,7 +23,7 @@ class AuthController extends Controller
                 $_SESSION['role'] = $user->role;
                 header('Location: /dashboard');
             } else {
-                die('Something went wrong');
+                header('Location: /login');
             }
         } else {
             abort(403);
@@ -41,7 +41,7 @@ class AuthController extends Controller
             if ($this->repository->register($data, 'author')) {
                 header('Location: /login');
             } else {
-                die('Something went wrong');
+                header('Location: /register');
             }
         } else {
             abort(403);
