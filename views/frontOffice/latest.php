@@ -39,7 +39,7 @@
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
                         <h4 class="fw-bold text-success mb-2">Wiki™</h4>
-                        <h1 class="fw-bold mb-2"><span class="text-bg-danger text-white">#3</span> derniers wikis</h1>
+                        <h1 class="fw-bold mb-2"><span class="text-bg-danger text-white">#3</span> Dernièrs wikis</h1>
                     </div>
                 </div>
             </div>
