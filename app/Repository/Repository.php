@@ -55,50 +55,6 @@ class Repository
         return $objects;
     }
 
-/*    public function search($search, $searchColumns = [], $conditions = [])
-    {
-        $searchConditions = array_map(function($column) {
-            return "$column LIKE :search";
-        }, $searchColumns);
-
-        $searchConditionsString = implode(' OR ', $searchConditions);
-
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $searchConditionsString;
-
-        if (!empty($conditions)) {
-            $columns = array_keys($conditions);
-            $placeholders = array_map(function ($column) {
-                return "$column = :$column";
-            }, $columns);
-            $placeholdersString = implode(' AND ', $placeholders);
-            $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $placeholdersString . ' AND ' . $searchConditionsString;
-        }
-
-        $this->db->query($query);
-
-        if (!empty($conditions)) {
-            foreach ($conditions as $column => $value) {
-                $this->db->bind(":$column", $value);
-            }
-        }
-
-        $this->db->bind(':search', '%' . $search . '%');
-
-        $results = $this->db->fetchAllRecords();
-
-        $objects = [];
-        foreach ($results as $result) {
-            $object = new $this->class();
-            $properties = get_class_vars($this->class);
-            foreach ($properties as $property => $value) {
-                $object->$property = $result->$property;
-            }
-            $objects[] = $object;
-        }
-        return $objects;
-    }*/
-
-
     public function find($id)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id = :id');
