@@ -13,6 +13,8 @@ $router = new Router();
 // Public routes
 $router->get('/', HomeController::class, 'index');
 $router->get('/wiki', HomeController::class, 'show');
+$router->get('/categories/show', HomeController::class, 'showCategories');
+$router->get('/tags/show', HomeController::class, 'showTags');
 $router->get('/dashboard', HomeController::class, 'dashboard');
 $router->post('/search', HomeController::class, 'search');
 $router->get('/login', HomeController::class, 'login');

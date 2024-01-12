@@ -20,11 +20,12 @@
         <span>Wiki™</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="post.html">Catégories</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/categories/show">Catégories</a></li>
+                <li class="nav-item"><a class="nav-link" href="/tags/show">Tags</a></li>
             </ul>
-            <a class="btn btn-outline-light shadow me-2" role="button" href="signup.html">S'inscrire</a>
-            <a class="btn btn-primary shadow" role="button" href="signup.html">Se connecter</a>
+            <a class="btn btn-outline-light shadow me-2" role="button" href="/register">S'inscrire</a>
+            <a class="btn btn-primary shadow" role="button" href="/login">Se connecter</a>
         </div>
     </div>
 </nav>

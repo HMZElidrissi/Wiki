@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Wiki;
+use App\Repository\CategoryRepository;
 use App\Repository\WikiRepository;
 
 class RenderWikis
@@ -80,6 +81,36 @@ class RenderWikis
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
+
+        return $html;
+    }
+
+    public static function renderCategories($categories)
+    {
+        $html = '';
+
+        foreach ($categories as $category) {
+            $html .= '<div class="col mb-4">';
+            $html .= '<div><img class="rounded img-fluid shadow w-100 fit-cover" src="/assets/img/products/3.jpg" style="height: 250px;">';
+            $html .= '<div class="py-4">';
+            $html .= '<h4 class="fw-bold">' . $category->title . '</h4>';
+            $html .= '<p class="text-muted">' . $category->description . '</p>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+        }
+
+        return $html;
+    }
+
+    public static function renderTags($tags)
+    {
+        $html = '';
+        $html .= '<p class="h4">';
+        foreach ($tags as $tag) {
+            $html .= '<span class="badge bg-secondary mb-2 me-2">' . $tag->title . '</span>';
+        }
+        $html .= '</p>';
 
         return $html;
     }

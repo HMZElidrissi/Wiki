@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Accueil - Wiki™</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
 
@@ -43,7 +43,7 @@
                         <div class="input-group my-4">
                             <input type="text"
                                    class="form-control"
-                                   placeholder="Rechercher des wikis ..."
+                                   placeholder="Rechercher des catégories ..."
                                    name="searchInput"
                                    id="searchInput">
                             <button class="btn btn-success" id="searchBtn" type="button">Recherche</button>
@@ -56,7 +56,7 @@
     <section class="py-5">
         <div class="container py-5">
             <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;" id="searchResults">
-                <?= \App\Services\RenderWikis::renderAll($wikis); ?>
+                <?= \App\Services\RenderWikis::renderCategories($categories); ?>
             </div>
         </div>
     </section>
@@ -78,7 +78,7 @@
             </div>
         </div>
     </footer>
-    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
     <script>
         $(function () {
             $('#searchBtn').on('click',function () {
@@ -97,8 +97,8 @@
             });
         });
     </script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bold-and-dark.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bold-and-dark.js"></script>
 </body>
 
 </html>
