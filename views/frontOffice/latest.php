@@ -18,8 +18,8 @@
                 </span><span>Wiki™</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/latest">Les derniers wikis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/latest">Les derniers wikis</a></li>
                 </ul>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <form action="/logout" method="post">
@@ -39,22 +39,8 @@
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
                         <h4 class="fw-bold text-success mb-2">Wiki™</h4>
-                        <h1 class="fw-bold">Explorez, Créez et Partagez des Savoirs Ensemble!</h1>
+                        <h1 class="fw-bold mb-2"><span class="text-bg-danger text-white">#3</span> derniers wikis</h1>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10 col-lg-6 mx-auto">
-                    <form method="POST" id="searchForm">
-                        <div class="input-group my-4">
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Rechercher des wikis ..."
-                                   name="searchInput"
-                                   id="searchInput">
-                            <button class="btn btn-success" id="searchBtn" type="button">Recherche</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

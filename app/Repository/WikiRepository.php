@@ -38,6 +38,23 @@ class WikiRepository extends Repository
         }
     }
 
+    public function latest()
+    {
+        $this->db->query('SELECT * FROM wikis WHERE is_archived = 0 ORDER BY created_at DESC LIMIT 3');
+        $results = $this->db->fetchAllRecords();
+
+        $objects = [];
+        foreach ($results as $result) {
+            $object = new $this->class();
+            $properties = get_class_vars($this->class);
+            foreach ($properties as $property => $value) {
+                $object->$property = $result->$property;
+            }
+            $objects[] = $object;
+        }
+        return $objects;
+    }
+
     public function archive($id)
     {
         $this->db->query('UPDATE wikis SET is_archived = 1 WHERE id = :id');

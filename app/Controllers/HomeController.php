@@ -23,6 +23,12 @@ class HomeController extends Controller
         $this->render('frontOffice/wiki', compact('wiki'));
     }
 
+    public function latest()
+    {
+        $wikis = $this->repository->latest();
+        $this->render('frontOffice/latest', compact('wikis'));
+    }
+
     public function dashboard(): void
     {
         $this->render('backOffice/dashboard');
