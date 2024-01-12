@@ -16,6 +16,13 @@ class HomeController extends Controller
         $this->render('frontOffice/home', compact('wikis'));
     }
 
+    public function show(): void
+    {
+        $id = $_GET['id'];
+        $wiki = $this->repository->find($id);
+        $this->render('frontOffice/wiki', compact('wiki'));
+    }
+
     public function dashboard(): void
     {
         $this->render('backOffice/dashboard');

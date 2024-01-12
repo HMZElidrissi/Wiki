@@ -31,54 +31,14 @@
 <main>
     <div class="container pt-4 pt-xl-5">
         <div class="row pt-5">
-            <a href="#">
+            <a href="/">
                 <svg width="22" height="22" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <path d="M 70,10 L 30,50 L 70,90" stroke="white" stroke-width="5" fill="none" />
                 </svg>
 
                 Retour aux articles
             </a>
-            <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
-                <div class="text-center">
-                    <h1 class="fw-bold">Explorez, Créez et Partagez des Savoirs Ensemble!</h1>
-                    <p class="mt-2 text-muted small">
-                        Publié il y a <time>1 jour</time>
-                    </p>
-                    <div class="author-info">
-                        <p class="text-muted">
-                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="35" fill="#BDBDBD" />
-                                <!-- Circle for the head -->
-                                <circle cx="50" cy="37" r="12" fill="#757575" />
-                                <!-- Rounded rectangle for the body -->
-                                <rect x="35" y="50" width="30" height="20" rx="15" ry="15" fill="#757575" />
-                            </svg>
-                            <strong>Author's Name</strong></p>
-                    </div>
-                    <div>
-                        <a href="#"
-                           class="border border-primary text-primary rounded-pill small px-2 py-1 mr-1">Techniques</a>
-                    </div>
-                </div>
-                <div class="pt-5">
-                    <img class="mx-auto d-block pb-3" src="assets/img/products/2.jpg">
-                    <p class="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                </div>
-                <div class="py-3">
-                    <a href="#"
-                       class="border border-danger text-danger rounded-pill small px-2 py-1">Updates</a>
-                    <a href="#"
-                       class="border border-danger text-danger rounded-pill small px-2 py-1">Updates</a>
-                    <a href="#"
-                       class="border border-danger text-danger rounded-pill small px-2 py-1">Updates</a>
-                    <a href="#"
-                       class="border border-danger text-danger rounded-pill small px-2 py-1">Updates</a>
-                </div>
-            </div>
+            <?= \App\Services\RenderWikis::render($wiki); ?>
         </div>
     </div>
 </main>

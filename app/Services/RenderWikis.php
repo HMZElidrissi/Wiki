@@ -20,7 +20,7 @@ class RenderWikis
             } else {
                 $imageUrl = '/assets/img/products/2.jpg';
             }
-            $html .= '<div><a href="/wiki/"'. $wiki->id . '"><img class="rounded img-fluid shadow w-100 fit-cover" src="' . $imageUrl . '" style="height: 250px;"></a>';
+            $html .= '<div><img class="rounded img-fluid shadow w-100 fit-cover" src="' . $imageUrl . '" style="height: 250px;">';
             $html .= '<div class="py-4">';
             $html .= '<span class="badge bg-primary mb-2">' . $wikiRepo->getCategory($wiki->id) . '</span><br>';
             $html .= '<div class="tags">';
@@ -30,6 +30,7 @@ class RenderWikis
             $html .= '</div>';
             $html .= '<h4 class="fw-bold">' . $wiki->title . '</h4>';
             $html .= '<p class="text-muted">' . $wiki->description . '</p>';
+            $html .= '<div><form action="/wiki" method="get"><input type="hidden" name="id" value="' . $wiki->id . '"><button type="submit" class="btn btn-outline-light btn-sm">Voir</button></form></div>';
             $html .= '</div>';
             $html .= '</div>';
             $html .= '</div>';
@@ -63,13 +64,18 @@ class RenderWikis
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="pt-5">';
-        $html .= '<img class="mx-auto d-block pb-3" src="' . $wiki->image . '">';
+        if (isset($wiki->image)){
+            $imageUrl = 'data:image/jpeg;base64,' . base64_encode($wiki->image);
+        } else {
+            $imageUrl = '/assets/img/products/1.jpg';
+        }
+        $html .= '<img class="rounded img-fluid shadow w-100 fit-cover" src="' . $imageUrl . '" style="height: 350px; object-fit: cover;">';
         $html .= '<p class="text-center">' . $wiki->content . '</p>';
         $html .= '</div>';
         $html .= '<div class="py-3">';
         $html .= '<div class="tags">';
         foreach ($wikiRepo->getTags($wiki->id) as $tag) {
-            $html .= '<span class="badge bg-secondary mb-2">' . $tag . '</span>';
+            $html .= '<span class="badge bg-secondary mb-2 me-1">' . $tag . '</span>';
         }
         $html .= '</div>';
         $html .= '</div>';
