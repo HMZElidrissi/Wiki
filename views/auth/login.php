@@ -26,7 +26,7 @@
                                     <h4 class="text-dark mb-4">Bienvenue à nouveau !</h4>
                                 </div>
                                 <form class="user" method="POST" action="/login">
-                                    <input type="text" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <div class="mb-3">
                                         <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrez l'adresse e-mail..." name="email">
                                     </div>
