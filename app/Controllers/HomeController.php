@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function search(): void
     {
         $search = $_POST['searchInput'];
-        $wikis = $this->repository->search($search, ['title', 'description', 'content']);
+        $wikis = $this->repository->search($search, ['title', 'description', 'content'], ['is_archived' => 0]);
         echo RenderWikis::renderAll($wikis);
     }
 }
