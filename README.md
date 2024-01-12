@@ -1,7 +1,7 @@
 # Système de Gestion de Contenu: Wiki™
 
 ## Description
-Ce projet vise à créer un système de gestionnaire de contenu efficace pour un wiki, associé à un front office, pour offrir une expérience utilisateur exceptionnelle. Il permettra une gestion aisée des catégories, des tags et des wikis, et offrira aux auteurs la possibilité de créer, modifier et supprimer leur contenu.
+Ce projet vise à créer un système de gestionnaire de contenu efficace des wikis, associé à un front office, pour offrir une expérience utilisateur exceptionnelle. Il permettra une gestion aisée des catégories, des tags et des wikis, et offrira aux auteurs la possibilité de créer, modifier et supprimer leur contenu.
 
 ## Fonctionnalités Clés
 
