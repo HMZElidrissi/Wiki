@@ -4,13 +4,15 @@ namespace App\Models;
 
 class Tag
 {
-    public string $title;
+    public int $id;
+    public ?string $title;
 
     /**
      * @param string $title
      */
-    public function new(string $title)
+    public function new(int $id ,string $title)
     {
+        $this->id = $id;
         $this->title = $title;
     }
 

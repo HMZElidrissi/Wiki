@@ -62,7 +62,7 @@ class RenderTable
                     $wikiRepo = new WikiRepository();
                     $table .= '<td>';
                     foreach ($wikiRepo->getTags($item->id) as $tag) {
-                        $table .= '<span class="badge bg-secondary mb-2">' . $tag . '</span>';
+                        $table .= '<span class="badge bg-secondary mb-2 me-1">' . $tag . '</span>';
                     }
                     $table .= '</td>';
                 } else if ($col == 'author'){

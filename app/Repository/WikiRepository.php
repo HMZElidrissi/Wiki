@@ -6,7 +6,6 @@ use App\Models\Wiki;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Tag;
-use PDO;
 
 class WikiRepository extends Repository
 {

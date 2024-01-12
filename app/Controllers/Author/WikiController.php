@@ -14,7 +14,7 @@ class WikiController extends Controller
 
     public function show(): void
     {
-        $wikis = $this->repository->all(['is_archived' => 0, 'author_id' => $_SESSION['user_id']]);
+        $data = $this->repository->all(['is_archived' => 0, 'author_id' => $_SESSION['user_id']]);
         $config = [
             'add' => [
                 'route' => '/wikis/create',
@@ -23,7 +23,7 @@ class WikiController extends Controller
             'cols' => ['image', 'title', 'description', 'created_at', 'category', 'tags', 'update', 'delete'],
             'route' => 'wikis'
         ];
-        $this->render('backOffice/wikis/show', compact('wikis', 'config'));
+        $this->render('backOffice/crudViews/show', compact('data', 'config'));
     }
 
     public function store(): void
@@ -44,7 +44,7 @@ class WikiController extends Controller
         ];
         $this->repository->create($data);
         $this->repository->addWikiTags($this->repository->getLastInsertedId(), $_POST['tags']);
-        header('Location: /wikis/show');
+        header('Location: /wikis');
     }
 
     public function create(): void
@@ -52,7 +52,7 @@ class WikiController extends Controller
         $categories = $this->repository->getAllCategories();
         $tags = $this->repository->getAllTags();
         $config = [
-            'route' => '/wikis/show',
+            'route' => '/wikis',
             'action' => '/wikis/store',
             'method' => 'POST',
             'fields' => [
@@ -102,13 +102,13 @@ class WikiController extends Controller
                 ]
             ]
         ];
-        $this->render('backOffice/wikis/create', compact('config'));
+        $this->render('backOffice/crudViews/create', compact('config'));
     }
 
     public function delete(): void
     {
         $this->repository->delete($_POST['id']);
-        header('Location: /wikis/show');
+        header('Location: /wikis');
     }
 
     public function update(): void
@@ -119,7 +119,7 @@ class WikiController extends Controller
         $tags = $this->repository->getTags($wiki->id);
         $category = $this->repository->getCategory($wiki->id);
         $config = [
-            'route' => '/wikis/show',
+            'route' => '/wikis',
             'action' => '/wikis/edit',
             'method' => 'POST',
             'fields' => [
@@ -172,7 +172,7 @@ class WikiController extends Controller
             'category_id' => $category,
             'tags' => $tags
         ];
-        $this->render('backOffice/wikis/update', compact('config', 'data'));
+        $this->render('backOffice/crudViews/update', compact('config', 'data'));
     }
 
     public function edit(): void
@@ -197,6 +197,6 @@ class WikiController extends Controller
         }
         $this->repository->update($id, $data);
         $this->repository->updateWikiTags($id, $_POST['tags']);
-        header('Location: /wikis/show');
+        header('Location: /wikis');
     }
 }

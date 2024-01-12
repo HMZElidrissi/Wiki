@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Controllers\Admin;
+
 use App\Repository\WikiRepository;
-
 use App\Controllers\Controller;
-
 
 class WikiController extends Controller
 {
@@ -15,12 +14,12 @@ class WikiController extends Controller
 
     public function display()
     {
-        $wikis = $this->repository->all(['is_archived' => 0]);
+        $data = $this->repository->all(['is_archived' => 0]);
         $config = [
             'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'archive'],
             'route' => 'wikis'
         ];
-        $this->render('backOffice/wikis/show', compact('wikis', 'config'));
+        $this->render('backOffice/crudViews/show', compact('data', 'config'));
     }
 
     public function archive()
@@ -42,6 +41,6 @@ class WikiController extends Controller
             'cols' => ['image', 'title', 'description', 'created_at', 'author', 'category', 'tags', 'restore'],
             'route' => 'wikis'
         ];
-        $this->render('backOffice/wikis/show', compact('wikis', 'config'));
+        $this->render('backOffice/crudViews/show', compact('wikis', 'config'));
     }
 }

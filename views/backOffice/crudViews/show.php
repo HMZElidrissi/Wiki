@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <div class="card shadow">
                         <div class="card-body">
-                            <?= \App\Services\RenderTable::render($wikis, $config) ?>
+                            <?= \App\Services\RenderTable::render($data, $config) ?>
                         </div>
                     </div>
                 </div>
