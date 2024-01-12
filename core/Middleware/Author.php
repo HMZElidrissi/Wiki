@@ -4,7 +4,7 @@ namespace Core\Middleware;
 
 class Author
 {
-    public function handle()
+    public function handle(): void
     {
         if ($_SESSION['role'] != 'author') {
             abort(403);

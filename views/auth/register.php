@@ -24,7 +24,7 @@
                             <h4 class="text-dark mb-4">Créez un compte !</h4>
                         </div>
                         <div id="error" class="mb-3 text-danger small"></div>
-                        <form class="user" method="POST" onsubmit="return validateForm()">
+                        <form class="user" method="POST" onsubmit="return validateForm()" action="/register">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <div class="mb-3">
                                 <input class="form-control form-control-user" type="text" id="name" placeholder="Nom complet" name="name">

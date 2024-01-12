@@ -2,6 +2,7 @@
 
 use Core\Router;
 use App\Controllers\HomeController;
+use App\Controllers\AuthController;
 use App\Controllers\Admin\WikiController;
 use App\Controllers\Admin\TagController;
 use App\Controllers\Admin\CategoryController;
@@ -13,7 +14,10 @@ $router = new Router();
 $router->get('/', HomeController::class, 'index');
 $router->get('/dashboard', HomeController::class, 'dashboard');
 $router->get('/login', HomeController::class, 'login');
+$router->post('/login', AuthController::class, 'login');
 $router->get('/register', HomeController::class, 'register');
+$router->post('/register', AuthController::class, 'register');
+$router->post('/logout', AuthController::class, 'logout');
 $router->get('/{code}', HomeController::class, 'error');
 
 // Admin routes for managing tags

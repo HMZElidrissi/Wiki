@@ -25,7 +25,8 @@
                                 <div class="text-center">
                                     <h4 class="text-dark mb-4">Bienvenue à nouveau !</h4>
                                 </div>
-                                <form class="user">
+                                <form class="user" method="POST" action="/login">
+                                    <input type="text" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <div class="mb-3">
                                         <input class="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrez l'adresse e-mail..." name="email">
                                     </div>
@@ -59,6 +60,29 @@
         </div>
     </div>
 </div>
+<script>
+    function validateForm() {
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+
+        if (email === '' || password === '') {
+            message('Veuillez remplir tous les champs !');
+            return false;
+        }
+
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            message("L'adresse e-mail n'est pas valide !");
+            return false;
+        }
+
+        return true;
+    }
+
+    function message(m) {
+        document.getElementById("error").innerHTML = m;
+    }
+</script>
 <script src="assets/dashboard/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/dashboard/js/bs-init.js"></script>
 <script src="assets/dashboard/js/theme.js"></script>

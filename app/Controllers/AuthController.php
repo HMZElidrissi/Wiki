@@ -2,34 +2,56 @@
 
 namespace App\Controllers;
 
-use App\Models\Admin;
+use App\Repository\UserRepository;
 
 class AuthController extends Controller
 {
-    private $model;
-
-    public function __construct() {
-        $this->model = new Admin();
+    public function __construct()
+    {
+        parent::__construct(UserRepository::class);
     }
 
-    public function login()
+    public function login(): void
     {
-        // login logic
-    }
-    public function register()
-    {
-        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-            // Gérer l'erreur
-        }
-        $data = [
-            'name' => htmlspecialchars($_POST['name']),
-            'email' => htmlspecialchars($_POST['email']),
-            'password' => htmlspecialchars($_POST['password']),
-        ];
-        if ($this->model->register($data, 'author')) {
-            header('Location: /login');
+        if (hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
+            $user = $this->repository->login($email, $password);
+            if ($user) {
+                $_SESSION['user_id'] = $user->id;
+                $_SESSION['username'] = $user->name;
+                $_SESSION['role'] = $user->role;
+                header('Location: /dashboard');
+            } else {
+                die('Something went wrong');
+            }
         } else {
-            die('Something went wrong');
+            abort(403);
         }
+    }
+
+    public function register(): void
+    {
+        if (hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            $data = [
+                'name' => htmlspecialchars($_POST['name']),
+                'email' => htmlspecialchars($_POST['email']),
+                'password' => htmlspecialchars($_POST['password']),
+            ];
+            if ($this->repository->register($data, 'author')) {
+                header('Location: /login');
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            abort(403);
+        }
+    }
+
+    public function logout(): void
+    {
+        session_unset();
+        session_destroy();
+        header('Location: /');
     }
 }

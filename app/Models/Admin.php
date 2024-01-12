@@ -6,8 +6,8 @@ use Core\Database;
 
 class Admin extends User
 {
-    public function __construct()
+    public function __toString(): string
     {
-        parent::__construct();
+        return $this->name;
     }
 }

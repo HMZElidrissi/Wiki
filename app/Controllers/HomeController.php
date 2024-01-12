@@ -9,18 +9,18 @@ class HomeController extends Controller
     {
         parent::__construct(WikiRepository::class);
     }
-    public function index()
+    public function index(): void
     {
         $wikis = $this->repository->all();
         $this->render('frontOffice/home', compact('wikis'));
     }
 
-    public function dashboard()
+    public function dashboard(): void
     {
         $this->render('backOffice/dashboard');
     }
 
-    public function login()
+    public function login(): void
     {
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -28,7 +28,7 @@ class HomeController extends Controller
         $this->render('auth/login');
     }
 
-    public function register()
+    public function register(): void
     {
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -36,7 +36,7 @@ class HomeController extends Controller
         $this->render('auth/register');
     }
 
-    public function error($code)
+    public function error($code): void
     {
         $this->render('errors/'.$code);
     }

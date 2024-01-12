@@ -25,6 +25,7 @@ function dd($data)
     die();
 }
 
+
 try {
     $route = $router->route($uri, $method);
 } catch (Exception $e) {
