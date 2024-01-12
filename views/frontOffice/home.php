@@ -35,15 +35,26 @@
                         <h1 class="fw-bold">Explorez, Créez et Partagez des Savoirs Ensemble!</h1>
                     </div>
                 </div>
-                <div class="col-12 col-lg-10 mx-auto">
-                    <!-- search filters -->
+            </div>
+            <div class="row">
+                <div class="col-10 col-lg-6 mx-auto">
+                    <form method="POST" id="searchForm">
+                        <div class="input-group my-4">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Rechercher des wikis ..."
+                                   name="searchInput"
+                                   id="searchInput">
+                            <button class="btn btn-success" id="searchBtn" type="button">Recherche</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </header>
     <section class="py-5">
         <div class="container py-5">
-            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;" id="searchResults">
                 <?= \App\Services\RenderWikis::renderAll($wikis); ?>
             </div>
         </div>
@@ -66,6 +77,25 @@
             </div>
         </div>
     </footer>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            $('#searchBtn').on('click',function () {
+                let searchInput = $('#searchInput').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/search',
+                    data: {
+                        searchInput
+                    },
+                    success: function (data) {
+                        $('#searchResults').html(data);
+                    }
+                });
+            });
+        });
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bold-and-dark.js"></script>
 </body>

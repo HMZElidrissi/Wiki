@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Repository\WikiRepository;
+use App\Services\RenderWikis;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,7 @@ class HomeController extends Controller
     }
     public function index(): void
     {
-        $wikis = $this->repository->all();
+        $wikis = $this->repository->all(['is_archived' => 0]);
         $this->render('frontOffice/home', compact('wikis'));
     }
 
@@ -39,5 +40,12 @@ class HomeController extends Controller
     public function error($code): void
     {
         $this->render('errors/'.$code);
+    }
+
+    public function search(): void
+    {
+        $search = $_POST['searchInput'];
+        $wikis = $this->repository->search($search, ['title', 'description', 'content']);
+        echo RenderWikis::renderAll($wikis);
     }
 }

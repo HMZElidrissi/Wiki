@@ -15,7 +15,7 @@ class RenderWikis
 
         foreach ($wikis as $wiki) {
             $html .= '<div class="col mb-4">';
-            if ($wiki->image ) {
+            if (isset($wiki->image)) {
                 $imageUrl = 'data:image/jpeg;base64,' . base64_encode($wiki->image);
             } else {
                 $imageUrl = '/assets/img/products/2.jpg';
@@ -25,7 +25,7 @@ class RenderWikis
             $html .= '<span class="badge bg-primary mb-2">' . $wikiRepo->getCategory($wiki->id) . '</span><br>';
             $html .= '<div class="tags">';
             foreach ($wikiRepo->getTags($wiki->id) as $tag) {
-                $html .= '<span class="badge bg-secondary mb-2">' . $tag . '</span>';
+                $html .= '<span class="badge bg-secondary mb-2 me-1">' . $tag . '</span>';
             }
             $html .= '</div>';
             $html .= '<h4 class="fw-bold">' . $wiki->title . '</h4>';

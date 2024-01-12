@@ -11,11 +11,10 @@ class Repository
     protected $class;
     protected $conditions;
 
-    public function __construct($class, $table, $conditions = []) {
+    public function __construct($class, $table) {
         $this->db = Database::getInstance();
         $this->class = $class;
         $this->table = $table;
-        $this->conditions = $conditions;
     }
 
     public function getLastInsertedId()
@@ -55,6 +54,33 @@ class Repository
         }
         return $objects;
     }
+
+    public function search($search, $searchColumns = [])
+    {
+        $searchConditions = array_map(function($column) {
+            return "$column LIKE :search";
+        }, $searchColumns);
+
+        $searchConditionsString = implode(' OR ', $searchConditions);
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $searchConditionsString;
+        $this->db->query($query);
+        $this->db->bind(':search', '%' . $search . '%');
+
+        $results = $this->db->fetchAllRecords();
+
+        $objects = [];
+        foreach ($results as $result) {
+            $object = new $this->class();
+            $properties = get_class_vars($this->class);
+            foreach ($properties as $property => $value) {
+                $object->$property = $result->$property;
+            }
+            $objects[] = $object;
+        }
+        return $objects;
+    }
+
 
     public function find($id)
     {
