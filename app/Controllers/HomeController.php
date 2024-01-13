@@ -31,7 +31,8 @@ class HomeController extends Controller
 
     public function dashboard(): void
     {
-        $this->render('backOffice/dashboard');
+        $stats = $this->repository->getStats();
+        $this->render('backOffice/dashboard', compact('stats'));
     }
 
     public function login(): void

@@ -154,4 +154,26 @@ class WikiRepository extends Repository
         }
         return $tags;
     }
+
+    public function getStats()
+    {
+        $this->db->query('SELECT COUNT(*) AS nbrOfWikis FROM wikis WHERE is_archived = 0');
+        $nbrOfWikis = $this->db->fetchSingleRecord()->nbrOfWikis;
+
+        $this->db->query('SELECT COUNT(*) AS nbrOfCategories FROM categories');
+        $nbrOfCategories = $this->db->fetchSingleRecord()->nbrOfCategories;
+
+        $this->db->query('SELECT COUNT(*) AS nbrOfTags FROM tags');
+        $nbrOfTags = $this->db->fetchSingleRecord()->nbrOfTags;
+
+        $this->db->query('SELECT COUNT(*) AS nbrOfAuthors FROM users WHERE role = "author"');
+        $nbrOfAuthors = $this->db->fetchSingleRecord()->nbrOfAuthors;
+
+        return [
+            'nbrOfWikis' => $nbrOfWikis,
+            'nbrOfCategories' => $nbrOfCategories,
+            'nbrOfTags' => $nbrOfTags,
+            'nbrOfAuthors' => $nbrOfAuthors
+        ];
+    }
 }
